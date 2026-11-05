@@ -35,19 +35,25 @@
     margin:0;background:var(--bg);color:var(--ink);
     font-family:"IBM Plex Sans Thai",system-ui,sans-serif;
     font-size:16px;line-height:1.6;
-    background-image:
-      radial-gradient(1200px 500px at 110% -10%, #E6EEDD 0%, transparent 60%),
-      radial-gradient(900px 400px at -20% 0%, #F1E6D2 0%, transparent 55%);
-    background-repeat:no-repeat;
   }
   .wrap{max-width:600px;margin:0 auto;padding:0 16px 64px}
 
-  /* Header */
-  header{padding:40px 4px 20px}
+  /* Hero */
+  .hero{position:relative;margin:0 -16px;height:230px;overflow:hidden;background:linear-gradient(180deg,#F7E9D3 0%,#F4F1E8 100%)}
+  .hero svg{position:absolute;inset:0;width:100%;height:100%}
+  .hero .bird{animation:drift 14s ease-in-out infinite}
+  @keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(14px,-6px)}}
+  @media (prefers-reduced-motion:reduce){.hero .bird{animation:none}}
+
+  header{padding:4px 4px 8px;margin-top:-18px;position:relative}
   .eyebrow{display:flex;align-items:center;gap:8px;font-size:13px;letter-spacing:.08em;color:var(--forest);font-weight:600;text-transform:uppercase}
   .eyebrow svg{width:16px;height:16px}
-  h1{font-family:"Noto Serif Thai",serif;font-weight:700;font-size:44px;line-height:1.15;margin:10px 0 6px;letter-spacing:-.01em}
+  h1{font-family:"Noto Serif Thai",serif;font-weight:700;font-size:46px;line-height:1.15;margin:6px 0 4px;letter-spacing:-.01em}
   .sub{color:var(--muted);margin:0;font-size:15px}
+  .countdown{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:6px 14px 6px 8px;border-radius:999px;background:var(--forest);color:#fff;font-size:14px;font-weight:500}
+  .countdown b{display:inline-grid;place-items:center;min-width:28px;height:28px;padding:0 6px;border-radius:999px;background:#fff;color:var(--forest);font-size:15px}
+  .stats{display:flex;gap:18px;margin:18px 4px 0;font-size:13px;color:var(--muted)}
+  .stats strong{display:block;font-family:"Noto Serif Thai",serif;font-size:22px;color:var(--ink);line-height:1.2}
 
   /* Trip info */
   .info{display:grid;gap:10px;margin:22px 0 8px}
@@ -60,36 +66,40 @@
   .info-card .warn{color:var(--clay);font-weight:500}
 
   /* Tabs */
-  nav{position:sticky;top:0;z-index:10;margin:18px -16px 0;padding:10px 16px;background:rgba(244,241,232,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
+  nav{position:sticky;top:0;z-index:10;margin:18px -16px 0;padding:10px 16px;background:rgba(244,241,232,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
   nav.stuck{border-color:var(--line)}
   .tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
   .tabs::-webkit-scrollbar{display:none}
   .tab{flex:none;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:7px 14px;font:inherit;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;white-space:nowrap}
   .tab.active{background:var(--forest);border-color:var(--forest);color:#fff}
 
-  /* Day */
+  /* Day banner */
   section.day{padding-top:30px;scroll-margin-top:64px}
-  .day-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:0 4px 6px}
-  .day-head h2{font-family:"Noto Serif Thai",serif;font-weight:700;font-size:26px;margin:0;line-height:1.2}
-  .day-head .date{font-size:14px;color:var(--muted);font-weight:500}
+  .banner{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;border-radius:22px;padding:18px 18px 18px 20px;margin-bottom:14px;overflow:hidden;background:var(--bannerbg)}
+  .banner h2{font-family:"Noto Serif Thai",serif;font-weight:700;font-size:26px;margin:0;line-height:1.2;color:var(--bannerink,var(--ink))}
+  .banner .date{font-size:14px;font-weight:600;color:var(--bannerink,var(--ink));opacity:.75}
+  .banner .theme{margin:6px 0 0;font-size:14.5px;color:var(--bannerink,var(--ink));opacity:.85;max-width:30ch}
+  .banner .art{flex:none;width:104px;height:84px}
   .today-badge{display:none;margin-left:8px;vertical-align:middle;font-family:"IBM Plex Sans Thai",sans-serif;font-size:12px;font-weight:600;background:var(--clay);color:#fff;padding:2px 9px;border-radius:999px}
   .day.today .today-badge{display:inline-block}
-  .theme{margin:0 4px 14px;color:var(--muted);font-size:15px}
   .route{display:inline-flex;align-items:center;gap:6px;margin:0 4px 16px;font-size:14px;font-weight:600;color:var(--forest);text-decoration:none;border:1px dashed #B9CBB3;background:var(--forest-soft);border-radius:999px;padding:7px 14px}
   .route svg{width:16px;height:16px}
 
   /* Timeline */
-  .stops{list-style:none;margin:0;padding:0;position:relative}
-  .stop{display:grid;grid-template-columns:54px 1fr;gap:0 12px;position:relative;padding-bottom:12px}
-  .stop::before{content:"";position:absolute;left:66px;top:30px;bottom:-4px;width:2px;background:var(--line)}
+  .stops{list-style:none;margin:0;padding:0}
+  .stop{display:grid;grid-template-columns:44px 36px 1fr;gap:0 10px;position:relative;padding-bottom:14px}
+  .stop::before{content:"";position:absolute;left:71px;top:40px;bottom:0;width:2px;background:repeating-linear-gradient(180deg,var(--line) 0 6px,transparent 6px 11px)}
   .stop:last-child::before{display:none}
-  .time{font-size:13px;font-weight:600;color:var(--muted);text-align:right;padding-top:16px;line-height:1.3}
-  .card{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:14px 14px 12px 18px;margin-left:14px;transition:opacity .2s}
-  .card::before{content:"";position:absolute;left:-20px;top:19px;width:12px;height:12px;border-radius:50%;background:var(--dot,var(--stone));box-shadow:0 0 0 4px var(--bg)}
+  .time{font-size:13px;font-weight:600;color:var(--muted);text-align:right;padding-top:9px;line-height:1.3}
+  .badge{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--tagbg);color:var(--tagfg);box-shadow:0 0 0 4px var(--bg);position:relative;z-index:1}
+  .badge svg{width:18px;height:18px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:14px 14px 12px;transition:opacity .2s;overflow:hidden}
+  .photo{display:block;width:calc(100% + 28px);margin:-14px -14px 12px;aspect-ratio:16/9;object-fit:cover;background:var(--stone-soft)}
   .card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
   .card h4{margin:0;font-size:17px;font-weight:600;line-height:1.35}
-  .tag{flex:none;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--tagbg,var(--stone-soft));color:var(--tagfg,var(--stone));white-space:nowrap}
-  .note{margin:4px 0 0;font-size:14.5px;color:var(--ink)}
+  .tag{flex:none;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--tagbg);color:var(--tagfg);white-space:nowrap}
+  .new{display:inline-block;margin-left:6px;font-size:11px;font-weight:600;color:var(--clay);border:1px solid #E5BFA9;border-radius:999px;padding:0 7px;vertical-align:2px}
+  .note{margin:4px 0 0;font-size:14.5px}
   .meta{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:8px;font-size:13px;color:var(--muted)}
   .meta span{display:inline-flex;align-items:center;gap:4px}
   .meta svg{width:14px;height:14px;flex:none}
@@ -103,23 +113,24 @@
   .stop.is-done h4{text-decoration:line-through;text-decoration-color:var(--stone)}
 
   /* types */
-  .t-food{--dot:var(--clay);--tagbg:var(--clay-soft);--tagfg:var(--clay)}
-  .t-cafe{--dot:var(--honey);--tagbg:var(--honey-soft);--tagfg:#8C6620}
-  .t-park{--dot:var(--forest);--tagbg:var(--forest-soft);--tagfg:var(--forest)}
-  .t-run{--dot:#1F4434;--tagbg:#1F4434;--tagfg:#fff}
-  .t-stay{--dot:var(--sky);--tagbg:var(--sky-soft);--tagfg:var(--sky)}
-  .t-fly{--dot:var(--stone);--tagbg:var(--stone-soft);--tagfg:#6A6558}
-  .t-run .card{border-color:#9FB7A6;background:linear-gradient(180deg,#F1F6EE, var(--paper))}
+  .t-food{--tagbg:var(--clay-soft);--tagfg:var(--clay)}
+  .t-cafe{--tagbg:var(--honey-soft);--tagfg:#8C6620}
+  .t-park{--tagbg:var(--forest-soft);--tagfg:var(--forest)}
+  .t-run{--tagbg:#1F4434;--tagfg:#fff}
+  .t-stay{--tagbg:var(--sky-soft);--tagfg:var(--sky)}
+  .t-fly{--tagbg:var(--stone-soft);--tagfg:#6A6558}
+  .t-run .card{border-color:#9FB7A6;background:linear-gradient(180deg,#EEF4EA,var(--paper))}
 
   /* footer */
   footer{margin-top:36px;padding:18px;border-radius:var(--radius);background:var(--stone-soft);font-size:14px;color:var(--muted)}
   footer h5{margin:0 0 6px;font-size:14px;color:var(--ink)}
   footer ul{margin:0;padding-left:18px}
   footer li{margin:2px 0}
-  .leaf{display:block;margin:28px auto 0;width:28px;height:28px;color:#B9CBB3}
+  .end{display:block;margin:28px auto 0;width:120px;height:40px}
 
   @media (min-width:520px){
-    h1{font-size:52px}
+    .hero{height:270px;border-radius:0 0 28px 28px}
+    h1{font-size:54px}
     .info{grid-template-columns:1fr 1fr}
     .info .wide{grid-column:1 / -1}
   }
@@ -128,6 +139,40 @@
 <body>
 <div class="wrap">
 
+  <!-- ภาพประกอบหัวเว็บ: ดอยสุเทพยามเช้า (วาดเป็น SVG) -->
+  <div class="hero" aria-hidden="true">
+    <svg viewBox="0 0 400 230" preserveAspectRatio="xMidYMax slice">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#F8E4C8"/><stop offset="1" stop-color="#F4F1E8"/>
+        </linearGradient>
+      </defs>
+      <rect width="400" height="230" fill="url(#sky)"/>
+      <circle cx="292" cy="78" r="30" fill="#F2C97E" opacity=".9"/>
+      <circle cx="292" cy="78" r="46" fill="#F2C97E" opacity=".18"/>
+      <g fill="#FFFDF7" opacity=".85">
+        <ellipse cx="80" cy="58" rx="34" ry="9"/><ellipse cx="104" cy="52" rx="22" ry="9"/>
+        <ellipse cx="350" cy="122" rx="30" ry="7"/>
+      </g>
+      <g class="bird" fill="none" stroke="#6E7B72" stroke-width="1.6" stroke-linecap="round">
+        <path d="M150 64q5-5 10 0q5-5 10 0"/><path d="M178 80q4-4 8 0q4-4 8 0"/>
+      </g>
+      <path d="M0 150 L60 112 L110 138 L170 96 L230 132 L290 104 L350 136 L400 118 L400 230 L0 230Z" fill="#C9D8C2"/>
+      <!-- เจดีย์บนยอดดอย -->
+      <g fill="#C79A3A">
+        <path d="M170 96 l-5 0 l2 -6 l-1 0 l4 -12 l4 12 l-1 0 l2 6z"/>
+        <rect x="169.4" y="72" width="1.2" height="6"/>
+      </g>
+      <path d="M0 176 L50 146 L120 170 L190 138 L260 168 L330 142 L400 162 L400 230 L0 230Z" fill="#9FB89A"/>
+      <path d="M0 200 Q60 182 120 196 T240 192 T400 194 L400 230 L0 230Z" fill="#6F9277"/>
+      <g fill="#2F5B45">
+        <path d="M34 206 l8 -22 l8 22z"/><path d="M48 208 l6 -16 l6 16z"/>
+        <path d="M352 204 l9 -24 l9 24z"/><path d="M368 208 l6 -15 l6 15z"/>
+      </g>
+      <path d="M0 214 Q100 204 200 214 T400 212 L400 230 L0 230Z" fill="#F4F1E8"/>
+    </svg>
+  </div>
+
   <header>
     <div class="eyebrow">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
@@ -135,6 +180,8 @@
     </div>
     <h1>เชียงใหม่</h1>
     <p class="sub">CMU Marathon + ตะลุยกิน · 3 คืน 4 วัน</p>
+    <div class="countdown" id="countdown" hidden></div>
+    <div class="stats" id="stats"></div>
 
     <div class="info">
       <a class="info-card" href="#d1">
@@ -182,11 +229,18 @@
       <li>ปุ่ม “ไปแล้ว” จำไว้ในเครื่องนี้เท่านั้น</li>
     </ul>
   </footer>
-  <svg class="leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+  <svg class="end" viewBox="0 0 120 40" aria-hidden="true" fill="none" stroke="#B9CBB3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M10 30 L30 14 L44 24 L60 8 L76 24 L90 14 L110 30"/>
+    <circle cx="60" cy="34" r="2" fill="#B9CBB3"/>
+  </svg>
 </div>
 
 <script>
-// ---------- แก้แผนได้ตรงนี้ ----------
+// =====================================================
+//  แก้แผนได้ตรงนี้
+//  - เพิ่มรูปให้จุดไหนก็ได้ ใส่ img:"ลิงก์รูป" (ควรเป็นรูปที่ถ่ายเอง/อัปขึ้นเว็บตัวเอง)
+//  - isNew:true = โชว์ป้าย "ใหม่"
+// =====================================================
 const TAGS = {
   food:{label:"กิน", cls:"t-food"},
   cafe:{label:"คาเฟ่/ขนม", cls:"t-cafe"},
@@ -197,10 +251,11 @@ const TAGS = {
 };
 
 const HOTEL = {name:"R1 Nimman Hotel Chiangmai", pid:"ChIJtbjuWGY62jAR8PWgm-BqtJQ"};
+const RACE_DATE = "2026-11-08";
 
 const DAYS = [
   {
-    id:"d1", date:"2026-11-06", tab:"ศ. 6", title:"วันศุกร์", dateLabel:"6 พ.ย.",
+    id:"d1", date:"2026-11-06", tab:"ศ. 6", title:"วันศุกร์", dateLabel:"6 พ.ย.", art:"night",
     theme:"บินถึงดึก เช็กอินแล้วออกไปหาลาบมื้อดึก",
     route:false,
     stops:[
@@ -215,7 +270,7 @@ const DAYS = [
     ]
   },
   {
-    id:"d2", date:"2026-11-07", tab:"ส. 7", title:"วันเสาร์", dateLabel:"7 พ.ย.",
+    id:"d2", date:"2026-11-07", tab:"ส. 7", title:"วันเสาร์", dateLabel:"7 พ.ย.", art:"leaf",
     theme:"วันก่อนแข่ง เดินเบาๆ กินให้พอดี นอนเร็ว",
     route:true,
     stops:[
@@ -224,28 +279,33 @@ const DAYS = [
       {time:"09:00", type:"cafe", name:"fimue", pid:"ChIJNVGjBwA72jARt1Jano3Fahs",
         note:"ทีรามิสุ มาเช้าคนน้อยกว่าช่วงสาย", hours:"08:00–20:00"},
       {time:"12:00", type:"food", name:"ลาบสันลมจอย", pid:"ChIJU2QC1L8x2jARZdN7WWpOKTc",
-        note:"มื้อเที่ยง ร้านริมอ่าง · ก่อนวันแข่งลองสั่งเผ็ดน้อยหน่อย", hours:"10:00–19:00", alert:"ปิดวันอาทิตย์"},
-      {time:"17:00", type:"food", name:"สยามสุกี้ (Siam Suki)", pid:"ChIJ03NLfQA72jARWe6jk-lIOTU",
+        note:"มื้อเที่ยง · ก่อนวันแข่งลองสั่งเผ็ดน้อยหน่อย", hours:"10:00–19:00", alert:"ปิดวันอาทิตย์"},
+      {time:"14:00", type:"cafe", name:"The Baristro Asian Style", pid:"ChIJ9T2bGy872jARyAyAWix9M0o", isNew:true,
+        note:"ถนนสุเทพ ใกล้ร้านลาบ มีโซนสวนให้นั่งชิล พักขาก่อนวันแข่ง", hours:"08:00–18:00",
+        alert:"รีวิวบอกมีค่าเข้า ~100 บาท หักเป็นค่าเครื่องดื่มได้"},
+      {time:"17:30", type:"food", name:"สยามสุกี้ (Siam Suki)", pid:"ChIJ03NLfQA72jARWe6jk-lIOTU",
         note:"มื้อเย็นก่อนแข่ง ได้คาร์บ กินเร็ว นอนเร็ว", hours:"10:00–21:00"}
     ]
   },
   {
-    id:"d3", date:"2026-11-08", tab:"อา. 8 · วันแข่ง", title:"วันอาทิตย์", dateLabel:"8 พ.ย.",
+    id:"d3", date:"2026-11-08", tab:"อา. 8 · วันแข่ง", title:"วันอาทิตย์", dateLabel:"8 พ.ย.", art:"medal",
     theme:"CMU Marathon ตอนเช้า แล้วกินฉลองยาวๆ",
     route:true,
     stops:[
       {time:"เช้ามืด", type:"run", name:"CMU Marathon · ศาลาอ่างแก้ว มช.", pid:"ChIJuX3ZAAA72jARBvJcHkfxEAE", q:"Sala Ang-kaew Chiang Mai University",
         note:"10th CMU – Chiang Mai Marathon · อยู่ไม่ไกลจากที่พัก", alert:"เช็กจุดสตาร์ทกับเวลาปล่อยตัวในเพจงาน"},
       {time:"09:30", type:"cafe", name:"Toast n’ Cups", pid:"ChIJp8FMipc72jARD05BO3RDgUE",
-        note:"มื้อแรกหลังเข้าเส้น ถนนห้วยแก้ว ใกล้อ่างแก้ว", hours:"08:30–17:00"},
-      {time:"14:00", type:"cafe", name:"Merry BonBon", pid:"ChIJcQlGF_o72jARfU9Ae3Oz2a4",
+        note:"มื้อแรกหลังเข้าเส้น ถนนห้วยแก้ว · กินเบาๆ เก็บท้องไว้พิซซ่า", hours:"08:30–17:00"},
+      {time:"12:30", type:"food", name:"Adirak Pizza", pid:"ChIJd-9OkZgw2jARgR9bYCtkpDE", isNew:true,
+        note:"พิซซ่าเตาฟืน แถววัดร่ำเปิง ร้านเล็ก คนแน่น แต่ได้ของเร็ว", hours:"11:00–22:30"},
+      {time:"15:00", type:"cafe", name:"Merry BonBon", pid:"ChIJcQlGF_o72jARfU9Ae3Oz2a4",
         note:"บิงซูสไตล์เกาหลี เจ้าของทำเองคนเดียว รอนิดนึง", hours:"11:00–18:30", alert:"ปิดจันทร์–อังคาร · วันนี้วันสุดท้ายที่ไปได้"},
-      {time:"18:00", type:"food", name:"ไส้ย่างสันป่าข่อย สาขาสันติธรรม", pid:"ChIJi65jyY872jAR7libTt47-uE",
+      {time:"18:30", type:"food", name:"ไส้ย่างสันป่าข่อย สาขาสันติธรรม", pid:"ChIJi65jyY872jAR7libTt47-uE",
         note:"สาขาแรกปิดวันอาทิตย์ เลยมาสาขานี้", hours:"17:00–24:00 ทุกวัน"}
     ]
   },
   {
-    id:"d4", date:"2026-11-09", tab:"จ. 9", title:"วันจันทร์", dateLabel:"9 พ.ย.",
+    id:"d4", date:"2026-11-09", tab:"จ. 9", title:"วันจันทร์", dateLabel:"9 พ.ย.", art:"coffee",
     theme:"ฟื้นขา จิบกาแฟ ซื้อขนมกลับ แล้วไปสนามบินก่อนเคาน์เตอร์ปิด 13:05",
     route:true,
     stops:[
@@ -262,13 +322,61 @@ const DAYS = [
     ]
   }
 ];
-// ---------- จบส่วนแก้แผน ----------
+// ================== จบส่วนแก้แผน ==================
 
 const ICON = {
   pin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
   clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>',
   alert:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>',
   route:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg>'
+};
+
+const TYPE_ICON = {
+  food:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>',
+  cafe:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v2"/><path d="M14 2v2"/><path d="M6 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/></svg>',
+  park:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z"/><path d="M7 16v6"/><path d="M13 19v3"/><path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5"/></svg>',
+  run:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15"/><path d="M11 12 5.12 2.2"/><path d="m13 12 5.88-9.8"/><path d="M8 7h8"/><circle cx="12" cy="17" r="5"/></svg>',
+  stay:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>',
+  fly:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>'
+};
+
+// ภาพประกอบประจำวัน
+const ART = {
+  night:{bg:"linear-gradient(135deg,#E9E4F2 0%,#F6E7DA 100%)", svg:`
+    <svg class="art" viewBox="0 0 104 84" aria-hidden="true">
+      <circle cx="74" cy="24" r="13" fill="#FFF6DF"/><circle cx="80" cy="20" r="11" fill="#EDE6F1"/>
+      <g fill="#C9B9DA"><circle cx="22" cy="16" r="1.6"/><circle cx="44" cy="10" r="1.2"/><circle cx="56" cy="30" r="1.2"/><circle cx="94" cy="44" r="1.4"/></g>
+      <path d="M18 40 l22 -6 l-6 6 l8 4 l-6 1 z" fill="#8F86A8"/>
+      <path d="M0 84 L0 66 L22 54 L40 64 L62 50 L84 62 L104 56 L104 84Z" fill="#B9C9B6"/>
+      <path d="M0 84 L0 74 Q30 66 60 74 T104 72 L104 84Z" fill="#8FAE90"/>
+    </svg>`},
+  leaf:{bg:"linear-gradient(135deg,#E3ECDF 0%,#F4EFD9 100%)", svg:`
+    <svg class="art" viewBox="0 0 104 84" aria-hidden="true">
+      <circle cx="78" cy="26" r="14" fill="#F2C97E"/>
+      <path d="M22 70 C14 44 34 18 62 16 C64 44 48 66 22 70Z" fill="#7FA382"/>
+      <path d="M22 70 C34 52 44 38 60 20" stroke="#E3ECDF" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M58 76 C58 58 72 46 92 46 C90 64 78 74 58 76Z" fill="#A9C3A3"/>
+      <path d="M58 76 C68 66 76 58 90 48" stroke="#E3ECDF" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+    </svg>`},
+  medal:{bg:"linear-gradient(135deg,#2F5B45 0%,#4C7A5E 100%)", ink:"#FFFDF7", svg:`
+    <svg class="art" viewBox="0 0 104 84" aria-hidden="true">
+      <path d="M38 6 L50 34 L58 34 L46 6Z" fill="#E7B9A1"/>
+      <path d="M66 6 L54 34 L46 34 L58 6Z" fill="#F2C97E"/>
+      <circle cx="52" cy="52" r="20" fill="#F2C97E"/>
+      <circle cx="52" cy="52" r="14" fill="none" stroke="#C79A3A" stroke-width="2"/>
+      <path d="M52 43 l3 6.5 l7 .8 l-5.2 4.8 l1.4 7 l-6.2 -3.6 l-6.2 3.6 l1.4 -7 l-5.2 -4.8 l7 -.8z" fill="#C79A3A"/>
+      <g stroke="#FFFDF7" stroke-width="1.6" stroke-linecap="round" opacity=".6"><path d="M14 30 l6 0"/><path d="M10 42 l8 0"/><path d="M86 30 l6 0"/><path d="M86 42 l8 0"/></g>
+    </svg>`},
+  coffee:{bg:"linear-gradient(135deg,#F6EDD6 0%,#F3E2D3 100%)", svg:`
+    <svg class="art" viewBox="0 0 104 84" aria-hidden="true">
+      <g stroke="#C9A97A" stroke-width="2.2" fill="none" stroke-linecap="round">
+        <path d="M40 22 q-5 -6 0 -12"/><path d="M50 20 q-5 -6 0 -12"/><path d="M60 22 q-5 -6 0 -12"/>
+      </g>
+      <path d="M28 30 h44 v22 a16 16 0 0 1 -16 16 h-12 a16 16 0 0 1 -16 -16z" fill="#FFFDF7" stroke="#B88A2E" stroke-width="2.4"/>
+      <path d="M72 36 h4 a8 8 0 0 1 0 16 h-4" fill="none" stroke="#B88A2E" stroke-width="2.4"/>
+      <ellipse cx="50" cy="76" rx="30" ry="4" fill="#E3D3B5"/>
+      <path d="M40 44 q10 8 20 0" fill="none" stroke="#B4613A" stroke-width="2" stroke-linecap="round"/>
+    </svg>`}
 };
 
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
@@ -301,6 +409,7 @@ const daysEl = document.getElementById("days");
 
 DAYS.forEach(day=>{
   tabsEl.insertAdjacentHTML("beforeend", `<a class="tab" href="#${day.id}" data-id="${day.id}">${esc(day.tab)}</a>`);
+  const art = ART[day.art] || ART.leaf;
 
   const stopsHtml = day.stops.map((p,i)=>{
     const key = `${day.id}-${i}`;
@@ -309,9 +418,11 @@ DAYS.forEach(day=>{
     return `
     <li class="stop ${t.cls} ${isDone ? "is-done":""}" data-key="${key}">
       <div class="time">${esc(p.time)}</div>
+      <div class="badge">${TYPE_ICON[p.type] || TYPE_ICON.fly}</div>
       <div class="card">
+        ${p.img ? `<img class="photo" src="${esc(p.img)}" alt="${esc(p.name)}" loading="lazy" onerror="this.remove()">` : ""}
         <div class="card-top">
-          <h4>${esc(p.name)}</h4>
+          <h4>${esc(p.name)}${p.isNew ? '<span class="new">ใหม่</span>' : ""}</h4>
           <span class="tag">${t.label}</span>
         </div>
         ${p.note ? `<p class="note">${esc(p.note)}</p>` : ""}
@@ -329,15 +440,23 @@ DAYS.forEach(day=>{
 
   daysEl.insertAdjacentHTML("beforeend", `
     <section class="day" id="${day.id}" data-date="${day.date}">
-      <div class="day-head">
-        <h2>${esc(day.title)}<span class="today-badge">วันนี้</span></h2>
-        <span class="date">${esc(day.dateLabel)}</span>
+      <div class="banner" style="--bannerbg:${art.bg};${art.ink ? `--bannerink:${art.ink}` : ""}">
+        <div>
+          <div class="date">${esc(day.dateLabel)}</div>
+          <h2>${esc(day.title)}<span class="today-badge">วันนี้</span></h2>
+          <p class="theme">${esc(day.theme)}</p>
+        </div>
+        ${art.svg}
       </div>
-      <p class="theme">${esc(day.theme)}</p>
       ${day.route ? `<a class="route" href="${routeUrl(day.stops)}" target="_blank" rel="noopener">${ICON.route}เส้นทางทั้งวันใน Maps</a>` : ""}
       <ol class="stops">${stopsHtml}</ol>
     </section>`);
 });
+
+// stats
+const placeCount = DAYS.reduce((n,d)=>n + d.stops.filter(s=>["food","cafe","park"].includes(s.type)).length, 0);
+document.getElementById("stats").innerHTML =
+  `<div><strong>${DAYS.length}</strong>วัน</div><div><strong>${placeCount}</strong>ที่กิน/เที่ยว</div><div><strong>1</strong>งานวิ่ง</div>`;
 
 daysEl.addEventListener("change", e=>{
   if(!e.target.matches('.done input')) return;
@@ -357,13 +476,23 @@ const io = new IntersectionObserver(entries=>{
 document.querySelectorAll("section.day").forEach(s=>io.observe(s));
 setActive("d1");
 
-// nav border when stuck
 const nav = document.getElementById("nav");
-window.addEventListener("scroll", ()=>{ nav.classList.toggle("stuck", nav.getBoundingClientRect().top <= 0 && window.scrollY > 200); }, {passive:true});
+window.addEventListener("scroll", ()=>{ nav.classList.toggle("stuck", window.scrollY > 300); }, {passive:true});
 
-// highlight today (Bangkok time)
+// วันนี้ + นับถอยหลัง (เวลาไทย)
 try{
   const today = new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Bangkok"}).format(new Date());
+  const toDay = s => Date.UTC(+s.slice(0,4), +s.slice(5,7)-1, +s.slice(8,10)) / 86400000;
+  const cd = document.getElementById("countdown");
+  const first = DAYS[0].date, last = DAYS[DAYS.length-1].date;
+  const tripIdx = DAYS.findIndex(d=>d.date===today);
+  if(today < first){
+    const n = toDay(RACE_DATE) - toDay(today);
+    cd.innerHTML = `<b>${n}</b> วันถึงวันแข่ง`; cd.hidden = false;
+  } else if(tripIdx >= 0){
+    cd.innerHTML = today===RACE_DATE ? `<b>GO</b> วันนี้วันแข่ง สู้ๆ` : `<b>${tripIdx+1}/${DAYS.length}</b> วันของทริป`;
+    cd.hidden = false;
+  }
   const sec = document.querySelector(`section.day[data-date="${today}"]`);
   if(sec){
     sec.classList.add("today");
