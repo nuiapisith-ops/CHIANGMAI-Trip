@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light only">
+<meta name="theme-color" content="#F4F1E8">
+<title>เชียงใหม่ 6–9 พ.ย.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=Noto+Serif+Thai:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme: light only;
+    --bg:#F4F1E8;
+    --paper:#FFFDF7;
+    --ink:#24312A;
+    --muted:#6E7B72;
+    --line:#E3DCCB;
+    --forest:#2F5B45;
+    --forest-soft:#E3ECDF;
+    --clay:#B4613A;
+    --clay-soft:#F6E6DA;
+    --honey:#B88A2E;
+    --honey-soft:#F6EDD6;
+    --sky:#3D6E7A;
+    --sky-soft:#E1ECEE;
+    --stone:#8A8577;
+    --stone-soft:#EDEAE1;
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:"IBM Plex Sans Thai",system-ui,sans-serif;
+    font-size:16px;line-height:1.6;
+    background-image:
+      radial-gradient(1200px 500px at 110% -10%, #E6EEDD 0%, transparent 60%),
+      radial-gradient(900px 400px at -20% 0%, #F1E6D2 0%, transparent 55%);
+    background-repeat:no-repeat;
+  }
+  .wrap{max-width:600px;margin:0 auto;padding:0 16px 64px}
+
+  /* Header */
+  header{padding:40px 4px 20px}
+  .eyebrow{display:flex;align-items:center;gap:8px;font-size:13px;letter-spacing:.08em;color:var(--forest);font-weight:600;text-transform:uppercase}
+  .eyebrow svg{width:16px;height:16px}
+  h1{font-family:"Noto Serif Thai",serif;font-weight:700;font-size:44px;line-height:1.15;margin:10px 0 6px;letter-spacing:-.01em}
+  .sub{color:var(--muted);margin:0;font-size:15px}
+
+  /* Trip info */
+  .info{display:grid;gap:10px;margin:22px 0 8px}
+  .info-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;display:flex;gap:14px;align-items:flex-start;text-decoration:none;color:inherit}
+  .info-ic{flex:none;width:38px;height:38px;border-radius:12px;display:grid;place-items:center}
+  .info-ic svg{width:20px;height:20px}
+  .info-card h3{margin:0;font-size:15px;font-weight:600}
+  .info-card p{margin:2px 0 0;font-size:14px;color:var(--muted)}
+  .info-card .big{font-size:20px;font-weight:600;color:var(--ink);letter-spacing:.01em}
+  .info-card .warn{color:var(--clay);font-weight:500}
+
+  /* Tabs */
+  nav{position:sticky;top:0;z-index:10;margin:18px -16px 0;padding:10px 16px;background:rgba(244,241,232,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
+  nav.stuck{border-color:var(--line)}
+  .tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{flex:none;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:7px 14px;font:inherit;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;white-space:nowrap}
+  .tab.active{background:var(--forest);border-color:var(--forest);color:#fff}
+
+  /* Day */
+  section.day{padding-top:30px;scroll-margin-top:64px}
+  .day-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:0 4px 6px}
+  .day-head h2{font-family:"Noto Serif Thai",serif;font-weight:700;font-size:26px;margin:0;line-height:1.2}
+  .day-head .date{font-size:14px;color:var(--muted);font-weight:500}
+  .today-badge{display:none;margin-left:8px;vertical-align:middle;font-family:"IBM Plex Sans Thai",sans-serif;font-size:12px;font-weight:600;background:var(--clay);color:#fff;padding:2px 9px;border-radius:999px}
+  .day.today .today-badge{display:inline-block}
+  .theme{margin:0 4px 14px;color:var(--muted);font-size:15px}
+  .route{display:inline-flex;align-items:center;gap:6px;margin:0 4px 16px;font-size:14px;font-weight:600;color:var(--forest);text-decoration:none;border:1px dashed #B9CBB3;background:var(--forest-soft);border-radius:999px;padding:7px 14px}
+  .route svg{width:16px;height:16px}
+
+  /* Timeline */
+  .stops{list-style:none;margin:0;padding:0;position:relative}
+  .stop{display:grid;grid-template-columns:54px 1fr;gap:0 12px;position:relative;padding-bottom:12px}
+  .stop::before{content:"";position:absolute;left:66px;top:30px;bottom:-4px;width:2px;background:var(--line)}
+  .stop:last-child::before{display:none}
+  .time{font-size:13px;font-weight:600;color:var(--muted);text-align:right;padding-top:16px;line-height:1.3}
+  .card{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:14px 14px 12px 18px;margin-left:14px;transition:opacity .2s}
+  .card::before{content:"";position:absolute;left:-20px;top:19px;width:12px;height:12px;border-radius:50%;background:var(--dot,var(--stone));box-shadow:0 0 0 4px var(--bg)}
+  .card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+  .card h4{margin:0;font-size:17px;font-weight:600;line-height:1.35}
+  .tag{flex:none;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--tagbg,var(--stone-soft));color:var(--tagfg,var(--stone));white-space:nowrap}
+  .note{margin:4px 0 0;font-size:14.5px;color:var(--ink)}
+  .meta{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:8px;font-size:13px;color:var(--muted)}
+  .meta span{display:inline-flex;align-items:center;gap:4px}
+  .meta svg{width:14px;height:14px;flex:none}
+  .meta .alert{color:var(--clay);font-weight:500}
+  .actions{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}
+  .maps{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-size:14px;font-weight:600;color:#fff;background:var(--forest);padding:8px 14px;border-radius:12px}
+  .maps svg{width:16px;height:16px}
+  .done{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);cursor:pointer;user-select:none;-webkit-user-select:none}
+  .done input{width:18px;height:18px;accent-color:var(--forest);margin:0}
+  .stop.is-done .card{opacity:.55}
+  .stop.is-done h4{text-decoration:line-through;text-decoration-color:var(--stone)}
+
+  /* types */
+  .t-food{--dot:var(--clay);--tagbg:var(--clay-soft);--tagfg:var(--clay)}
+  .t-cafe{--dot:var(--honey);--tagbg:var(--honey-soft);--tagfg:#8C6620}
+  .t-park{--dot:var(--forest);--tagbg:var(--forest-soft);--tagfg:var(--forest)}
+  .t-run{--dot:#1F4434;--tagbg:#1F4434;--tagfg:#fff}
+  .t-stay{--dot:var(--sky);--tagbg:var(--sky-soft);--tagfg:var(--sky)}
+  .t-fly{--dot:var(--stone);--tagbg:var(--stone-soft);--tagfg:#6A6558}
+  .t-run .card{border-color:#9FB7A6;background:linear-gradient(180deg,#F1F6EE, var(--paper))}
+
+  /* footer */
+  footer{margin-top:36px;padding:18px;border-radius:var(--radius);background:var(--stone-soft);font-size:14px;color:var(--muted)}
+  footer h5{margin:0 0 6px;font-size:14px;color:var(--ink)}
+  footer ul{margin:0;padding-left:18px}
+  footer li{margin:2px 0}
+  .leaf{display:block;margin:28px auto 0;width:28px;height:28px;color:#B9CBB3}
+
+  @media (min-width:520px){
+    h1{font-size:52px}
+    .info{grid-template-columns:1fr 1fr}
+    .info .wide{grid-column:1 / -1}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+      Trip · 6–9 Nov 2026
+    </div>
+    <h1>เชียงใหม่</h1>
+    <p class="sub">CMU Marathon + ตะลุยกิน · 3 คืน 4 วัน</p>
+
+    <div class="info">
+      <a class="info-card" href="#d1">
+        <div class="info-ic" style="background:var(--stone-soft);color:#6A6558">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+        </div>
+        <div>
+          <h3>ขาไป · FD3427 · ศ. 6 พ.ย.</h3>
+          <p class="big">20:20 → 21:35</p>
+          <p>ดอนเมือง T2 → เชียงใหม่ · เช็กอินเคาน์เตอร์ 9–11</p>
+        </div>
+      </a>
+      <a class="info-card" href="#d4">
+        <div class="info-ic" style="background:var(--stone-soft);color:#6A6558">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+        </div>
+        <div>
+          <h3>ขากลับ · FD3442 · จ. 9 พ.ย.</h3>
+          <p class="big">13:50 → 15:05</p>
+          <p>เชียงใหม่ → ดอนเมือง T2 · เคาน์เตอร์ 49–58 <span class="warn">ปิด 13:05</span></p>
+        </div>
+      </a>
+      <a class="info-card wide" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=R1%20Nimman%20Hotel%20Chiangmai&query_place_id=ChIJtbjuWGY62jAR8PWgm-BqtJQ">
+        <div class="info-ic" style="background:var(--sky-soft);color:var(--sky)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
+        </div>
+        <div>
+          <h3>R1 Nimman Hotel Chiangmai</h3>
+          <p>เช็กอิน ศ. 6 พ.ย. 14:00 · เช็กเอาท์ จ. 9 พ.ย. 12:00</p>
+          <p>Standard Double · ซ.ชลประทาน นิมมาน · แตะเพื่อเปิด Maps</p>
+        </div>
+      </a>
+    </div>
+  </header>
+
+  <nav id="nav"><div class="tabs" id="tabs"></div></nav>
+
+  <main id="days"></main>
+
+  <footer>
+    <h5>ก่อนออกไป เช็กอีกนิด</h5>
+    <ul>
+      <li>เวลาเปิด–ปิดร้านอิงจาก Google Maps อาจเปลี่ยนได้ โดยเฉพาะ Merry BonBon ดูเพจร้านก่อนไป</li>
+      <li>จุดสตาร์ท เวลาปล่อยตัว และวันรับบิบ CMU Marathon ดูในเพจงานอีกที</li>
+      <li>ปุ่ม “ไปแล้ว” จำไว้ในเครื่องนี้เท่านั้น</li>
+    </ul>
+  </footer>
+  <svg class="leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+</div>
+
+<script>
+// ---------- แก้แผนได้ตรงนี้ ----------
+const TAGS = {
+  food:{label:"กิน", cls:"t-food"},
+  cafe:{label:"คาเฟ่/ขนม", cls:"t-cafe"},
+  park:{label:"สวน", cls:"t-park"},
+  run:{label:"วันแข่ง", cls:"t-run"},
+  stay:{label:"ที่พัก", cls:"t-stay"},
+  fly:{label:"เดินทาง", cls:"t-fly"}
+};
+
+const HOTEL = {name:"R1 Nimman Hotel Chiangmai", pid:"ChIJtbjuWGY62jAR8PWgm-BqtJQ"};
+
+const DAYS = [
+  {
+    id:"d1", date:"2026-11-06", tab:"ศ. 6", title:"วันศุกร์", dateLabel:"6 พ.ย.",
+    theme:"บินถึงดึก เช็กอินแล้วออกไปหาลาบมื้อดึก",
+    route:false,
+    stops:[
+      {time:"19:00", type:"fly", name:"ดอนเมือง อาคาร 2", q:"Don Mueang International Airport Terminal 2",
+        note:"FD3427 ออก 20:20 · เคาน์เตอร์เช็กอิน 9–11"},
+      {time:"21:35", type:"fly", name:"ถึงสนามบินเชียงใหม่", q:"Chiang Mai International Airport",
+        note:"เรียกรถเข้านิมมาน"},
+      {time:"22:15", type:"stay", name:"R1 Nimman Hotel", pid:HOTEL.pid, q:HOTEL.name,
+        note:"เช็กอิน วางของ", hours:"เช็กอินได้ตั้งแต่ 14:00"},
+      {time:"22:45", type:"food", name:"มหาลาบ (Maha Larb CNX)", pid:"ChIJFTPMYaI72jARpDJxQihUMLs",
+        note:"มื้อดึกคืนแรก อยู่ฝั่งนิมมานเหมือนกัน", hours:"11:00–03:00 ทุกวัน"}
+    ]
+  },
+  {
+    id:"d2", date:"2026-11-07", tab:"ส. 7", title:"วันเสาร์", dateLabel:"7 พ.ย.",
+    theme:"วันก่อนแข่ง เดินเบาๆ กินให้พอดี นอนเร็ว",
+    route:true,
+    stops:[
+      {time:"06:30", type:"park", name:"สวนสาธารณะ อบจ.เชียงใหม่", pid:"ChIJK2dtCQA72jARZ6AmC46T_Co",
+        note:"Shakeout เบาๆ ลูปละ ~1.4 กม. วิวดอยสุเทพ", hours:"เปิด 24 ชม."},
+      {time:"09:00", type:"cafe", name:"fimue", pid:"ChIJNVGjBwA72jARt1Jano3Fahs",
+        note:"ทีรามิสุ มาเช้าคนน้อยกว่าช่วงสาย", hours:"08:00–20:00"},
+      {time:"12:00", type:"food", name:"ลาบสันลมจอย", pid:"ChIJU2QC1L8x2jARZdN7WWpOKTc",
+        note:"มื้อเที่ยง ร้านริมอ่าง · ก่อนวันแข่งลองสั่งเผ็ดน้อยหน่อย", hours:"10:00–19:00", alert:"ปิดวันอาทิตย์"},
+      {time:"17:00", type:"food", name:"สยามสุกี้ (Siam Suki)", pid:"ChIJ03NLfQA72jARWe6jk-lIOTU",
+        note:"มื้อเย็นก่อนแข่ง ได้คาร์บ กินเร็ว นอนเร็ว", hours:"10:00–21:00"}
+    ]
+  },
+  {
+    id:"d3", date:"2026-11-08", tab:"อา. 8 · วันแข่ง", title:"วันอาทิตย์", dateLabel:"8 พ.ย.",
+    theme:"CMU Marathon ตอนเช้า แล้วกินฉลองยาวๆ",
+    route:true,
+    stops:[
+      {time:"เช้ามืด", type:"run", name:"CMU Marathon · ศาลาอ่างแก้ว มช.", pid:"ChIJuX3ZAAA72jARBvJcHkfxEAE", q:"Sala Ang-kaew Chiang Mai University",
+        note:"10th CMU – Chiang Mai Marathon · อยู่ไม่ไกลจากที่พัก", alert:"เช็กจุดสตาร์ทกับเวลาปล่อยตัวในเพจงาน"},
+      {time:"09:30", type:"cafe", name:"Toast n’ Cups", pid:"ChIJp8FMipc72jARD05BO3RDgUE",
+        note:"มื้อแรกหลังเข้าเส้น ถนนห้วยแก้ว ใกล้อ่างแก้ว", hours:"08:30–17:00"},
+      {time:"14:00", type:"cafe", name:"Merry BonBon", pid:"ChIJcQlGF_o72jARfU9Ae3Oz2a4",
+        note:"บิงซูสไตล์เกาหลี เจ้าของทำเองคนเดียว รอนิดนึง", hours:"11:00–18:30", alert:"ปิดจันทร์–อังคาร · วันนี้วันสุดท้ายที่ไปได้"},
+      {time:"18:00", type:"food", name:"ไส้ย่างสันป่าข่อย สาขาสันติธรรม", pid:"ChIJi65jyY872jAR7libTt47-uE",
+        note:"สาขาแรกปิดวันอาทิตย์ เลยมาสาขานี้", hours:"17:00–24:00 ทุกวัน"}
+    ]
+  },
+  {
+    id:"d4", date:"2026-11-09", tab:"จ. 9", title:"วันจันทร์", dateLabel:"9 พ.ย.",
+    theme:"ฟื้นขา จิบกาแฟ ซื้อขนมกลับ แล้วไปสนามบินก่อนเคาน์เตอร์ปิด 13:05",
+    route:true,
+    stops:[
+      {time:"07:00", type:"park", name:"สวนสาธารณะรถไฟ", pid:"ChIJpZx-QgAl2jARQa6Y7rNY73U",
+        note:"เดิน/จ็อกฟื้นตัว ลู่ 1 กม.", hours:"05:00–21:00"},
+      {time:"08:30", type:"cafe", name:"GRAPH ท่าแพ (สาขาใหม่)", pid:"ChIJQ1Qyb2U72jARKuWPx3HvCVo",
+        note:"ตรงข้ามประตูท่าแพ", hours:"07:30–20:00"},
+      {time:"10:00", type:"cafe", name:"London.cnx", pid:"ChIJ00J1AAA72jARpTS-aNykh-8",
+        note:"วันธรรมดาคิวน้อยกว่า ซื้อกลับบ้าน", hours:"10:00–18:00", alert:"ถ้าคิวยาวเกิน 10:45 ตัดใจ"},
+      {time:"11:15", type:"stay", name:"เช็กเอาท์ R1 Nimman", pid:HOTEL.pid, q:HOTEL.name,
+        note:"เก็บกระเป๋า", hours:"เช็กเอาท์ภายใน 12:00"},
+      {time:"12:00", type:"fly", name:"สนามบินเชียงใหม่", q:"Chiang Mai International Airport",
+        note:"FD3442 ออก 13:50 · เคาน์เตอร์ 49–58", alert:"เคาน์เตอร์ปิด 13:05"}
+    ]
+  }
+];
+// ---------- จบส่วนแก้แผน ----------
+
+const ICON = {
+  pin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
+  clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>',
+  alert:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>',
+  route:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg>'
+};
+
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+
+function mapsUrl(p){
+  const u = new URLSearchParams({api:"1", query:p.q || p.name});
+  if(p.pid) u.set("query_place_id", p.pid);
+  return "https://www.google.com/maps/search/?" + u.toString();
+}
+
+function routeUrl(stops){
+  const s = stops.map(p=>({name:p.q || p.name, pid:p.pid}));
+  const dest = s[s.length-1];
+  const wps = s.slice(0,-1);
+  const u = new URLSearchParams({api:"1", travelmode:"driving", destination:dest.name});
+  if(dest.pid) u.set("destination_place_id", dest.pid);
+  if(wps.length){
+    u.set("waypoints", wps.map(w=>w.name).join("|"));
+    if(wps.every(w=>w.pid)) u.set("waypoint_place_ids", wps.map(w=>w.pid).join("|"));
+  }
+  return "https://www.google.com/maps/dir/?" + u.toString();
+}
+
+let done = {};
+try { done = JSON.parse(localStorage.getItem("cnx-trip-done") || "{}") || {}; } catch(e){ done = {}; }
+function saveDone(){ try { localStorage.setItem("cnx-trip-done", JSON.stringify(done)); } catch(e){} }
+
+const tabsEl = document.getElementById("tabs");
+const daysEl = document.getElementById("days");
+
+DAYS.forEach(day=>{
+  tabsEl.insertAdjacentHTML("beforeend", `<a class="tab" href="#${day.id}" data-id="${day.id}">${esc(day.tab)}</a>`);
+
+  const stopsHtml = day.stops.map((p,i)=>{
+    const key = `${day.id}-${i}`;
+    const t = TAGS[p.type] || TAGS.fly;
+    const isDone = !!done[key];
+    return `
+    <li class="stop ${t.cls} ${isDone ? "is-done":""}" data-key="${key}">
+      <div class="time">${esc(p.time)}</div>
+      <div class="card">
+        <div class="card-top">
+          <h4>${esc(p.name)}</h4>
+          <span class="tag">${t.label}</span>
+        </div>
+        ${p.note ? `<p class="note">${esc(p.note)}</p>` : ""}
+        ${(p.hours || p.alert) ? `<div class="meta">
+          ${p.hours ? `<span>${ICON.clock}${esc(p.hours)}</span>` : ""}
+          ${p.alert ? `<span class="alert">${ICON.alert}${esc(p.alert)}</span>` : ""}
+        </div>` : ""}
+        <div class="actions">
+          <a class="maps" href="${mapsUrl(p)}" target="_blank" rel="noopener">${ICON.pin}เปิด Maps</a>
+          <label class="done"><input type="checkbox" ${isDone ? "checked":""}> ไปแล้ว</label>
+        </div>
+      </div>
+    </li>`;
+  }).join("");
+
+  daysEl.insertAdjacentHTML("beforeend", `
+    <section class="day" id="${day.id}" data-date="${day.date}">
+      <div class="day-head">
+        <h2>${esc(day.title)}<span class="today-badge">วันนี้</span></h2>
+        <span class="date">${esc(day.dateLabel)}</span>
+      </div>
+      <p class="theme">${esc(day.theme)}</p>
+      ${day.route ? `<a class="route" href="${routeUrl(day.stops)}" target="_blank" rel="noopener">${ICON.route}เส้นทางทั้งวันใน Maps</a>` : ""}
+      <ol class="stops">${stopsHtml}</ol>
+    </section>`);
+});
+
+daysEl.addEventListener("change", e=>{
+  if(!e.target.matches('.done input')) return;
+  const li = e.target.closest(".stop");
+  const key = li.dataset.key;
+  if(e.target.checked){ done[key] = 1; li.classList.add("is-done"); }
+  else { delete done[key]; li.classList.remove("is-done"); }
+  saveDone();
+});
+
+// active tab on scroll
+const tabs = [...document.querySelectorAll(".tab")];
+function setActive(id){ tabs.forEach(t=>t.classList.toggle("active", t.dataset.id===id)); }
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{ if(en.isIntersecting) setActive(en.target.id); });
+},{rootMargin:"-45% 0px -50% 0px"});
+document.querySelectorAll("section.day").forEach(s=>io.observe(s));
+setActive("d1");
+
+// nav border when stuck
+const nav = document.getElementById("nav");
+window.addEventListener("scroll", ()=>{ nav.classList.toggle("stuck", nav.getBoundingClientRect().top <= 0 && window.scrollY > 200); }, {passive:true});
+
+// highlight today (Bangkok time)
+try{
+  const today = new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Bangkok"}).format(new Date());
+  const sec = document.querySelector(`section.day[data-date="${today}"]`);
+  if(sec){
+    sec.classList.add("today");
+    if(!location.hash) setTimeout(()=>sec.scrollIntoView({behavior:"smooth"}), 300);
+  }
+}catch(e){}
+</script>
+</body>
+</html>
